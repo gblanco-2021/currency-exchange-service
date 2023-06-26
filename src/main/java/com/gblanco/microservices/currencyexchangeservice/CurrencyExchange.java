@@ -30,4 +30,15 @@ public class CurrencyExchange {
         this.to = to;
         this.conversionMultiple = conversionMultiple;
     }
+
+    @Override
+    public String toString() {
+        return "CurrencyExchange{" +
+                "id=" + id +
+                ", from='" + from + '\'' +
+                ", to='" + to + '\'' +
+                ", conversionMultiple=" + conversionMultiple +
+                ", environment='" + environment + '\'' +
+                '}';
+    }
 }
