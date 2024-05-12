@@ -8,7 +8,7 @@ metadata:
   name: currency-exchange
   namespace: default
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: currency-exchange
@@ -23,9 +23,19 @@ spec:
         app: currency-exchange
     spec:
       containers:
-      - image: devgblanco/mmv2-currency-exchange-service:0.0.11-SNAPSHOT
+      - image: devgblanco/mmv2-currency-exchange-service:0.0.12-SNAPSHOT
         imagePullPolicy: IfNotPresent
         name: mmv2-currency-exchange-service
+        readinessProbe:
+          failureThreshold: 30
+          httpGet:
+            port: 8000
+            path: actuator/health/readiness
+        livenessProbe:
+          failureThreshold: 30
+          httpGet:
+            port: 8000
+            path: actuator/health/liveness
       restartPolicy: Always
 ---
 
